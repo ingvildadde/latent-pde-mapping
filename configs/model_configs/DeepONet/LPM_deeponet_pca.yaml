@@ -1,0 +1,44 @@
+include_geometric_descriptor: True
+include_F_loss: False
+geometric_descriptor: pca
+use_LPM: True
+map_pde: True
+use_global_D: False
+dimensions: 2
+model:
+  name: LPM-DeepONet
+  activation_function: tanh
+  description: Training DeepONet model based on supervised data
+  hidden_layers: 8 #6
+  hidden_units:  50 #100 #50
+  branch_input_size: 16 #20 #7210 #14
+  trunk_input_size: 3 #16 #9 #3
+  branches_out_dim: 50
+  output_size: 2 #1
+optimizer:
+  learning_rate: 0.001
+  name: Adam
+random_seed: 1234 #42
+training:
+  batch_size: 264 #140 #264
+  epochs: 5000
+  loss_weights:
+    bc: 1
+    data: 1
+    init: 1
+    ode: 1
+    pde: 1
+  dynamic_loss_weights:
+    enabled: False
+    method: grad_norm_fixed_ma
+    alpha: 1.0
+    update_frequency: 50
+    warmup_steps: 6000
+  splits:
+    num_boundary_points: 80
+    num_collocation_points: 700
+    num_initial_points: 30
+    num_supervised_points: 14
+  val_epochs: 10
+  grad_clip_norm: 1.0
+val_method: max_mse_loss

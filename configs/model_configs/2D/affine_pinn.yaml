@@ -1,0 +1,42 @@
+include_geometric_descriptor: True
+include_F_loss: False
+geometric_descriptor: affine_parameters
+use_global_D: False
+use_LPM: False
+dimensions: 2
+model:
+  activation_function: tanh
+  description: Does not use LPM but includes affine parameters
+  hidden_layers: 8
+  hidden_units:  64
+  input_size: 9
+  name: Affine-PINN
+  output_size: 2
+optimizer:
+  learning_rate: 0.001
+  lr_scheduler: none
+  name: Adam
+random_seed: 1234
+training:
+  batch_size: 264
+  epochs: 5000
+  loss_weights:
+    bc: 1
+    data: 1
+    init: 1
+    ode: 1
+    pde: 1
+  dynamic_loss_weights:
+    enabled: False
+    method: grad_norm_fixed_average
+    alpha: 0.2
+    update_frequency: 50
+    warmup_steps: 6000
+  splits:
+    num_boundary_points: 80
+    num_collocation_points: 700
+    num_initial_points: 30
+    num_supervised_points: 14
+  val_epochs: 10
+  grad_clip_norm: 1.0
+  val_method: max_mse_loss

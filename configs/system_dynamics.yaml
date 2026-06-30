@@ -1,0 +1,8 @@
+
+conductivities:
+  sigma_il: 0.2 #0.17 #0.2
+  sigma_it: 0.2 #0.019 #0.2
+  sigma_in: 0.2
+  sigma_el: 1.0 #0.62 #1.0
+  sigma_et: 1.0 #0.24 #1.0
+  sigma_en: 1.0
