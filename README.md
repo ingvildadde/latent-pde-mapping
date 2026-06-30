@@ -3,6 +3,15 @@
 This repository contains code implementation for the paper "Latent PDE mapping for physics-informed learning across
 geometries with limited data".
 
-Latent PDE mapping 
+Latent PDE mapping enables accurate predictions on novel, unseen geometries by pulling back
+geometry-specific PDE residuals and boundary conditions to a predefined latent geometry via the
+deformation gradient, thereby enabling the automated calculation of geometry-consistent shape
+gradients.
 
-![CMAME_overview_fig_v13_a_b_latent_geometry_v15 (1).pdf](https://github.com/user-attachments/files/29494686/CMAME_overview_fig_v13_a_b_latent_geometry_v15.1.pdf)
+
+<p align="center">
+  <img src="./CMAME_overview_fig.png" alt="Alternative text" width="800">
+</p>
+
+
+## Installation
