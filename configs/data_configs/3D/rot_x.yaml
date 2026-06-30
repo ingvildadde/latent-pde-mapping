@@ -1,6 +1,6 @@
-root_path: ./data/anisotropic_fixed_lon_file/3D
-internal_family_file: H_rot_n50_x_circular_center_fixed_cond_preselected_thetas_refined_fixed_rerun.h5
-external_family_file: H_rot_n35_x_circular_center_fixed_cond_preselected_thetas_refined_fixed_rerun.h5
+root_path: ./data
+internal_family_file: H_rot_x_internal.h5
+external_family_file: H_rot_x_external.h5
 splits:
   train_test_size: 0.8
   test_val_size: 0.87

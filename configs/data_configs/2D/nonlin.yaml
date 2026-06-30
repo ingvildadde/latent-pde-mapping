@@ -1,6 +1,6 @@
-root_path: ./data/anisotropic_fixed_lon_file/2D
-internal_family_file: G_nonlin_n50_circular_middle_refined_mesh_new_lon_file_corrected_F.h5
-external_family_file: G_nonlin_n35_circular_middle_refined_mesh_new_lon_file_corrected_F.h5
+root_path: ./data
+internal_family_file: G_nonlin_internal.h5
+external_family_file: G_nonlin_external.h5
 splits:
   train_test_size: 0.8
   test_val_size: 0.87

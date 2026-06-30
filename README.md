@@ -10,8 +10,12 @@ gradients.
 
 
 <p align="center">
-  <img src="./CMAME_overview_fig.png" alt="Alternative text" width="800">
+  <img src="./CMAME_overview_fig.png" alt="Alternative text" width="500">
 </p>
 
 
 ## Installation
+
+
+## Getting started
+Finite element data used for training and testing of the physics-informed machine learning models are available at [INSERT LINK]. Download the HDF5 files and load them into the `data` folder.
