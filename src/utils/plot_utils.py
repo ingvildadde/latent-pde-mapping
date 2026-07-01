@@ -22,7 +22,7 @@ ticks_label_size = 20
 plt.rcParams.update({'font.size': font_size})
 
 
-def create_multiple_V_plots(predictions: list, time: list, indices: list, families: list, use_all_domains, family_names: list, figsize=(18, 18), padding=0.08, model_order: list = ['LPM-PINN', 'Affine-PINN', 'Basic-PINN']):
+def create_multiple_V_plots(predictions: list, time: list, indices: list, families: list, use_all_domains, family_names: list, figsize=(18, 18), padding=0.08, model_order: list = ['LPM-PINN', 'PA-PINN', 'Basic-PINN']):
     
     plt.rcParams.update({'font.size': font_size})
 
@@ -88,7 +88,7 @@ def create_multiple_V_plots(predictions: list, time: list, indices: list, famili
 
 
 
-def create_multiple_V_plots_3d(predictions: list, time: list, indices: list, families: list, use_all_domains: bool, dir: list, family_names: list, figsize=(18, 18), model_order=['LPM-PINN', 'Affine-PINN', 'Basic-PINN'], downsample_factor=1):
+def create_multiple_V_plots_3d(predictions: list, time: list, indices: list, families: list, use_all_domains: bool, dir: list, family_names: list, figsize=(18, 18), model_order=['LPM-PINN', 'PA-PINN', 'Basic-PINN'], downsample_factor=1):
 
     plt.rcParams.update({'font.size': font_size})
 
@@ -402,7 +402,7 @@ def create_AT_plots(predictions:dict, indices: list, family, use_all_domains):
 
         sc2 = axes[row][1].scatter(domain.x[:, 0, 0], domain.x[:, 0, 1], c=v_at)
         axes[row][1].set_xlabel('x [mm]')
-        axes[0][1].set_title("Affine-PINN")
+        axes[0][1].set_title("PA-PINN")
         fig.colorbar(sc2)
 
         sc3 = axes[row][2].scatter(domain.x[:, 0, 0], domain.x[:, 0, 1], c=m_at)
@@ -444,7 +444,7 @@ def create_RT_plots(predictions:dict, indices: list, family, use_all_domains):
 
         sc2 = axes[row][1].scatter(domain.x[:, 0, 0], domain.x[:, 0, 1], c=v_at)
         axes[row][1].set_xlabel('x [mm]')
-        axes[0][1].set_title("Affine-PINN")
+        axes[0][1].set_title("PA-PINN")
         fig.colorbar(sc2)
 
         sc3 = axes[row][2].scatter(domain.x[:, 0, 0], domain.x[:, 0, 1], c=m_at)
@@ -594,7 +594,7 @@ def grouped_boxplot(dataframe,
     families = sorted(dataframe["family"].unique())
     models = dataframe["model"].unique()
 
-    model_colors = {"Basic-PINN":'#9ecae1', "RefAffine-PINN": '#31a354', "Affine-PINN": "#FFA500"}
+    model_colors = {"Basic-PINN":'#9ecae1', "RefAffine-PINN": '#31a354', "PA-PINN": "#FFA500"}
     
     # Set width for individual boxplots and spacing for groups
     box_width = 0.22
@@ -666,7 +666,7 @@ def compute_times_boxplot(computational_times, y_label):
     colors = ['#023e8a', '#0077b6', '#0096c7', '#00b4d8', 'darkgreen', 'green']
 
     fig = plt.figure(figsize=(10, 4))
-    bplot = plt.boxplot([computational_times['LPM-PINN'], computational_times['LG-PINN'], computational_times['Affine-PINN'], computational_times['Basic-PINN'], computational_times['LPM-DeepONet'], computational_times['LG-DeepONet']],
+    bplot = plt.boxplot([computational_times['LPM-PINN'], computational_times['LG-PINN'], computational_times['PA-PINN'], computational_times['Basic-PINN'], computational_times['LPM-DeepONet'], computational_times['LG-DeepONet']],
                 labels=['LPM-PINN', 'LG-PINN', 'PA-PINN', 'Basic-PINN', 'LPM-DON', 'LG-DON'],
                 patch_artist=True,
                 medianprops=dict(color='black', linewidth=1)

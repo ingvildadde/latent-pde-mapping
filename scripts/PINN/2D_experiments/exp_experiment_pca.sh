@@ -22,13 +22,12 @@ export DATASETS_ROOT_FOLDER_PATH="${current_path}/data/raw"
 
 
 ### PINN runs ###
-
-OUTPUT_PATH="outputs/2D/anisotropic/center/exp_pca_rerun_with_epoch_times_reproduce_1"
+OUTPUT_PATH="outputs/2D/anisotropic/center/exp_pca"
 DATA_CONFIG_FILE="configs/data_configs/2D/exp.yaml"
 
 LPM_PINN_CONFIG_FILE="configs/model_configs/PINN/2D/LPM_pinn_pca.yaml"
 LG_PINN_CONFIG_FILE="configs/model_configs/PINN/2D/LG_pinn_pca.yaml"
-AFFINE_PINN_CONFIG_FILE="configs/model_configs/PINN/2D/affine_pinn_pca.yaml"
+PA_PINN_CONFIG_FILE="configs/model_configs/PINN/2D/PA_pinn_pca.yaml"
 BASIC_PINN_CONFIG_FILE="configs/model_configs/PINN/2D/basic_pinn.yaml"
 
 # LPM-PINN
@@ -37,8 +36,8 @@ pipenv run python3 -m PINN.main "${LPM_PINN_CONFIG_FILE}" "${DATA_CONFIG_FILE}" 
 # LG-PINN
 pipenv run python3 -m PINN.main "${LG_PINN_CONFIG_FILE}" "${DATA_CONFIG_FILE}" --output_path "${OUTPUT_PATH}" --save --make_internal_predictions --make_external_predictions
 
-# Affine-PINN
-pipenv run python3 -m PINN.main "${AFFINE_PINN_CONFIG_FILE}" "${DATA_CONFIG_FILE}" --output_path "${OUTPUT_PATH}" --save --make_internal_predictions --make_external_predictions
+# PA-PINN
+pipenv run python3 -m PINN.main "${PA_PINN_CONFIG_FILE}" "${DATA_CONFIG_FILE}" --output_path "${OUTPUT_PATH}" --save --make_internal_predictions --make_external_predictions
 
 # Basic-PINN
 pipenv run python3 -m PINN.main "${BASIC_PINN_CONFIG_FILE}" "${DATA_CONFIG_FILE}" --output_path "${OUTPUT_PATH}" --save --make_internal_predictions --make_external_predictions

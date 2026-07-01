@@ -191,7 +191,7 @@ def create_vm_animation(input_data: np.ndarray,
     plt.close()
     return ani
 
-def animate_multiple_V_plots(predictions: list, indices: list, families: list, use_all_domains, family_names: list, time_steps: list = None, figsize=(18, 18), padding=0.08, model_order: list = ['LPM-PINN', 'Affine-PINN', 'Basic-PINN'], interval=100, fps=10, font_size: int = font_size):
+def animate_multiple_V_plots(predictions: list, indices: list, families: list, use_all_domains, family_names: list, time_steps: list = None, figsize=(18, 18), padding=0.08, model_order: list = ['LPM-PINN', 'PA-PINN', 'Basic-PINN'], interval=100, fps=10, font_size: int = font_size):
     """
     Animation version of create_multiple_V_plots. Animates over time steps.
 
@@ -314,7 +314,7 @@ def animate_multiple_V_plots(predictions: list, indices: list, families: list, u
     return anim
 
 
-def animate_multiple_V_plots_3d(predictions: list, indices: list, families: list, use_all_domains: bool, family_names: list, time_steps: list = None, figsize=(18, 18), model_order=['LPM-PINN', 'Affine-PINN', 'Basic-PINN'], downsample_factor=1, interval=100, fps=10, font_size: int = font_size):
+def animate_multiple_V_plots_3d(predictions: list, indices: list, families: list, use_all_domains: bool, family_names: list, time_steps: list = None, figsize=(18, 18), model_order=['LPM-PINN', 'PA-PINN', 'Basic-PINN'], downsample_factor=1, interval=100, fps=10, font_size: int = font_size):
     """
     Animation version of create_multiple_V_plots_3d_notebook. Animates over time steps.
 

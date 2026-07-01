@@ -30,7 +30,7 @@ def compute_boundary_term_for_all_checkpoints(args):
 
     for folder in os.listdir(folder_path):
 
-        if not folder.startswith("Affine") or not os.path.isdir(os.path.join(folder_path, folder)):
+        if not folder.startswith("PA") or not os.path.isdir(os.path.join(folder_path, folder)):
             continue
 
         checkpoints_path = os.path.join(os.path.abspath("outputs/checkpoints"), folder)

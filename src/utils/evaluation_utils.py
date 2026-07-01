@@ -123,7 +123,7 @@ def get_predictions_for_all_PINNs(folder_root_path: str, downsample_factor: int 
 
 def get_boundary_terms(boundary_path):
 
-    affine_boundary_path = os.path.join(boundary_path, "Affine-PINN_training_boundary_terms.npy")
+    affine_boundary_path = os.path.join(boundary_path, "PA-PINN_training_boundary_terms.npy")
 
     if not os.path.exists(affine_boundary_path):
         print(f"Boundary terms not found in {boundary_path}")

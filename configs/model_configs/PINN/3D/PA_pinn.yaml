@@ -1,16 +1,16 @@
 include_geometric_descriptor: True
 include_F_loss: False
-geometric_descriptor: pca
+geometric_descriptor: affine_parameters
 use_global_D: False
 use_LPM: False
 dimensions: 3
 model:
   activation_function: tanh
-  description: Does not use LPM but includes pca geometric descriptor
+  description: Does not use LPM but includes affine geometric descriptor
   hidden_layers: 8
   hidden_units:  64
-  input_size: 6 #13
-  name: Affine-PINN
+  input_size: 13
+  name: PA-PINN
   output_size: 2
 optimizer:
   learning_rate: 0.001

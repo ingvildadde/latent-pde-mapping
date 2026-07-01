@@ -10,7 +10,7 @@ model:
   hidden_layers: 8
   hidden_units:  64
   input_size: 5 #9
-  name: Affine-PINN
+  name: PA-PINN
   output_size: 2
 optimizer:
   learning_rate: 0.001
