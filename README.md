@@ -82,7 +82,7 @@ Key flags:
 
 ### Physics-Informed Deep Operator Networks (PI-DONs)
 
-Two DeepONet variants are available:
+Two PI-DONs variants are available:
 
 | Model | Config (2D) | Config (3D) |
 |---|---|---|
