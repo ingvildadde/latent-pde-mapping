@@ -13,7 +13,6 @@ tqdm = "*"
 ipywidgets = "*"
 pyvista = "*"
 pyyaml = "*"
-wandb = "*"
 plotly = "*"
 python-dotenv = "*"
 optuna = "*"
@@ -23,7 +22,6 @@ seaborn = "*"
 h5py = "*"
 imageio = {extras = ["ffmpeg"], version = "*"}
 neuraloperator = "*"
-deepxde = "*"
 ipympl = "*"
 
 [dev-packages]

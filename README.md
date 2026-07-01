@@ -36,10 +36,10 @@ Key dependencies include PyTorch, scikit-learn, and h5py (see [`Pipfile`](Pipfil
 
 ## Data
 
-Download the finite element HDF5 data files from **[INSERT LINK]** and place them in the `data/` folder.
+Download the finite element HDF5 data files from [https://doi.org/10.5281/zenodo.20928054](https://doi.org/10.5281/zenodo.20928054) and place them in the `data/` folder.
 
 
-## Training from scratch
+## Usage
 
 Shell scripts for all experiments are provided in the `scripts/` folder:
 
@@ -59,8 +59,3 @@ sbatch scripts/PINN/2D_experiments/rot_experiment.sh
 ```bash
 sbatch scripts/DeepONet/2D_experiments/run_deeponet_rot.sh
 ```
-
-
-## Pretrained models
-
-Pretrained models from the paper are available in the `trained_models/` folder.
