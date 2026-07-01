@@ -1,0 +1,13 @@
+__pycache__/
+
+.vscode
+
+data/*
+outputs
+slurm_output
+checkpoints
+
+
+.env
+*.gif
+*.npy
