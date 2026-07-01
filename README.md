@@ -41,21 +41,41 @@ Download the finite element HDF5 data files from [https://doi.org/10.5281/zenodo
 
 ## Usage
 
-Shell scripts for all experiments are provided in the `scripts/` folder:
-
-- **PINNs** — `scripts/PINN/`
-- **DeepONets** — `scripts/DeepONet/`
-
-Each script submits a Slurm job and trains multiple model variants by default. Modify the script to target a specific model, and update the Slurm directives to match your cluster configuration.
-
-**Example** — train PINNs on the 2D rotational family using deformation parameters as geometric descriptor:
+Example of how to train LPM-PINN on the 2D rotational family with deformation parameters as geometric descriptor:
 
 ```bash
-sbatch scripts/PINN/2D_experiments/rot_experiment.sh
+OUTPUT_PATH="outputs/2D/anisotropic/center/rot" # Modify to your prefered output folder name
+DATA_CONFIG_FILE="configs/data_configs/2D/rot.yaml"
+    
+LPM_PINN_CONFIG_FILE="configs/model_configs/PINN/2D/LPM_pinn.yaml"
+
+pipenv run python3 -m PINN.main "${LPM_PINN_CONFIG_FILE}" "${DATA_CONFIG_FILE}" --output_path "${OUTPUT_PATH}" --save --make_internal_predictions --make_external_predictions --map_pde
 ```
 
-**Example** — train a physics-informed DeepONet on the same family:
+LG-PINN, PA-PINN and Basic-PINN can be trained using a similar bash command with the appropriate data config from the `data_configs` folder and model config from the `model_configs` folder without the `--map_pde` flag.
+
+
+Example of how to train LPM-DON on the 2D rotational family with deformation parameters as geometric descriptor:
 
 ```bash
-sbatch scripts/DeepONet/2D_experiments/run_deeponet_rot.sh
+LPM_DEEPONET_MODEL_CONFIG="./configs/model_configs/DeepONet/LPM_deeponet.yaml"
+
+SIM_CONFIG="./configs/system_dynamics.yaml"
+DATA_CONFIG="./configs/data_configs/2D/rot.yaml"
+OUTPUT_FOLDER_PATH="./outputs/DeepONets/2D/anisotropic/center/rot_14_sensors" # Modify to your prefered output folder name
+NUM_SENSORS=14
+FAMILY_NAME="rot_family"
+DIM=2
+
+
+pipenv run python3 DeepONet/main.py \
+    --model_config "$LPM_DEEPONET_MODEL_CONFIG" \
+    --sim_config "$SIM_CONFIG" \
+    --data_config "$DATA_CONFIG" \
+    --output_folder_path "$OUTPUT_FOLDER_PATH" \
+    --num_sensors "$NUM_SENSORS" \
+    --family_name "$FAMILY_NAME" \
+    --dim "$DIM" \
 ```
+
+The LG-DON can be run in a similar manner by using the appropriate model config file.
