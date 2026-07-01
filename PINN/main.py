@@ -10,7 +10,6 @@ if project_root not in sys.path:
 
 from src.utils.file_utils import load_config, load_trained_model
 from PINN.train_models import train_pinn
-from src.training.tune_parameters import tune_parameters
 from src.inference.predictions import make_prediction
 from src.data.domain_family import DomainFamily, CombinedFamily
 
@@ -54,30 +53,20 @@ def run_experiment(args):
     else:
         internal_family = internal_families[0]
 
-    if args.tune:
-        best_params = tune_parameters(
-                                train_func=train_pinn,
-                                train_data=internal_family,
-                                sim_config=sim_config,
-                                model_config=model_config,
-                                data_config=data_config,
-                                device=device)
-        print(f"Best parameters found: {best_params}")
-    else:
-        print(f"\nTraining PINN using LPM and with {dim}D data") if model_config['use_LPM'] else print(f"\nTraining PINN with {dim}D data")
-        trained_model, _, _ = train_pinn(
-                model_config=model_config,
-                sim_config=sim_config,
-                data_config=data_config,
-                family=internal_family,
-                device=device,
-                save_results=args.save,
-                noise_level=args.noise,
-                output_path=args.output_path,
-                checkpoint_folder_path=args.checkpoint_folder_path,
-                start_epoch=args.start_epoch,
-                map_pde=args.map_pde
-                )
+    print(f"\nTraining PINN using LPM and with {dim}D data") if model_config['use_LPM'] else print(f"\nTraining PINN with {dim}D data")
+    trained_model, _, _ = train_pinn(
+            model_config=model_config,
+            sim_config=sim_config,
+            data_config=data_config,
+            family=internal_family,
+            device=device,
+            save_results=args.save,
+            noise_level=args.noise,
+            output_path=args.output_path,
+            checkpoint_folder_path=args.checkpoint_folder_path,
+            start_epoch=args.start_epoch,
+            map_pde=args.map_pde
+            )
         
 
     if args.make_internal_predictions:
@@ -111,7 +100,6 @@ if __name__ == "__main__":
     parser.add_argument("--noise", type=float, default=0.0,
                         help="Add Gaussian noise to training data. Value is noise level (e.g., 0.01 for 1% noise).")
     parser.add_argument("--save", action="store_true", help="Saves trained models if provided.")
-    parser.add_argument("--tune", action="store_true", help="Tunes hyperparameters for the given models if provided.")
     parser.add_argument("--make_internal_predictions", action="store_true", help="Make predictions on internal test domains if provided.")
     parser.add_argument("--make_external_predictions", action="store_true", help="Make predictions on external test domains if provided.")
     parser.add_argument("--map_pde", action="store_true", help="Use mapped PDE loss calculation if provided.")

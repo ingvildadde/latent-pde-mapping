@@ -7,10 +7,8 @@ import matplotlib.pyplot as plt
 
 from PINN.model import PINN
 from PINN.pinn_trainer import PINNTrainer
-from src.training.soap import SOAP
 from src.data.domain_family import DomainFamily
 from src.utils.save_utils import save_all
-from src.utils.noise_utils import add_gaussian_noise
 
 
 def train_pinn(model_config: dict,
@@ -28,12 +26,6 @@ def train_pinn(model_config: dict,
     include_scaling_layer = model_config.get("include_scaling_layer", False)
     val_eval_method = model_config.get("val_method", "max_mse_loss")
     print(f"Validation evaluation method: {val_eval_method}")
-    
-    if noise_level != 0.0:
-        print(f"Applying noise level of {noise_level}")
-        for domain in family.train_domains:
-            domain.V = add_gaussian_noise(domain.V, noise_level)
-        family.train_dataloader, family.mapped_train_dataloader = family.create_train_batches()
 
     if include_scaling_layer:
         x_offset, x_scale = family.get_x_scaling_params()
@@ -78,10 +70,7 @@ def train_pinn(model_config: dict,
         print("Optimizer state loaded successfully.")
         print(f"Resuming training from loaded checkpoint (epoch {start_epoch}).")
     else:
-        if model_config["model"]["name"] == "SOAP":
-            optimizer = SOAP(lr=3e-3, betas=(.95, .95), weight_decay=.01, precondition_frequency=10)
-        else:
-            optimizer = torch.optim.Adam(params=PINN_model.parameters(), lr=model_config["optimizer"]["learning_rate"])
+        optimizer = torch.optim.Adam(params=PINN_model.parameters(), lr=model_config["optimizer"]["learning_rate"])
 
     trainer = PINNTrainer(
         optimizer=optimizer,
