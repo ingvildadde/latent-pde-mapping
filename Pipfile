@@ -1,0 +1,33 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+torch = "*"
+scikit-learn = "*"
+pandas = "*"
+matplotlib = "*"
+torchinfo = "*"
+tqdm = "*"
+ipywidgets = "*"
+pyvista = "*"
+pyyaml = "*"
+wandb = "*"
+plotly = "*"
+python-dotenv = "*"
+optuna = "*"
+torch-summary = "*"
+pytest = "*"
+seaborn = "*"
+h5py = "*"
+imageio = {extras = ["ffmpeg"], version = "*"}
+neuraloperator = "*"
+deepxde = "*"
+ipympl = "*"
+
+[dev-packages]
+ipykernel = "*"
+
+[requires]
+python_version = "3.11"
