@@ -41,41 +41,75 @@ Download the finite element HDF5 data files from [https://doi.org/10.5281/zenodo
 
 ## Usage
 
-Example of how to train LPM-PINN on the 2D rotational family with deformation parameters as geometric descriptor:
+### Physics-Informed Neural Networks (PINNs)
+
+Four PINN variants are available:
+
+| Model | Config (2D) | Config (3D) | Notes |
+|---|---|---|---|
+| LPM-PINN | `configs/model_configs/PINN/2D/LPM_pinn.yaml` | `configs/model_configs/PINN/3D/LPM_pinn.yaml` | Requires `--map_pde` |
+| LG-PINN | `configs/model_configs/PINN/2D/LG_pinn.yaml` | `configs/model_configs/PINN/3D/LG_pinn.yaml` | |
+| PA-PINN | `configs/model_configs/PINN/2D/PA_pinn.yaml` | `configs/model_configs/PINN/3D/PA_pinn.yaml` | |
+| Basic-PINN | `configs/model_configs/PINN/2D/basic_pinn.yaml` | `configs/model_configs/PINN/3D/basic_pinn.yaml` | |
+
+Append `_pca` to the config filename to use PCA-based geometric descriptors instead of deformation parameters (e.g. `LPM_pinn_pca.yaml`).
+
+**Example** — train LPM-PINN on the 2D rotational family:
 
 ```bash
-OUTPUT_PATH="outputs/2D/anisotropic/center/rot" # Modify to your prefered output folder name
+OUTPUT_PATH="outputs/2D/anisotropic/center/rot"  # adjust as needed
 DATA_CONFIG_FILE="configs/data_configs/2D/rot.yaml"
-    
 LPM_PINN_CONFIG_FILE="configs/model_configs/PINN/2D/LPM_pinn.yaml"
 
-pipenv run python3 -m PINN.main "${LPM_PINN_CONFIG_FILE}" "${DATA_CONFIG_FILE}" --output_path "${OUTPUT_PATH}" --save --make_internal_predictions --make_external_predictions --map_pde
+pipenv run python3 -m PINN.main "${LPM_PINN_CONFIG_FILE}" "${DATA_CONFIG_FILE}" \
+    --output_path "${OUTPUT_PATH}" \
+    --save \
+    --make_internal_predictions \
+    --make_external_predictions \
+    --map_pde
 ```
 
-LG-PINN, PA-PINN and Basic-PINN can be trained using a similar bash command with the appropriate data config from the `data_configs` folder and model config from the `model_configs` folder without the `--map_pde` flag.
+Key flags:
 
+| Flag | Description |
+|---|---|
+| `--map_pde` | Enable latent PDE mapping loss — required for LPM-PINN, omit for all others |
+| `--save` | Save the trained model to `--output_path` |
+| `--make_internal_predictions` | Evaluate on interpolation (internal) test domains after training |
+| `--make_external_predictions` | Evaluate on extrapolation (external) test domains after training |
 
-Example of how to train LPM-DON on the 2D rotational family with deformation parameters as geometric descriptor:
+---
+
+### Physics-Informed Deep Operator Networks (PI-DONs)
+
+Two DeepONet variants are available:
+
+| Model | Config (2D) | Config (3D) |
+|---|---|---|
+| LPM-DON | `configs/model_configs/DeepONet/2D/LPM_deeponet.yaml` | `configs/model_configs/DeepONet/3D/LPM_deeponet.yaml` |
+| LG-DON | `configs/model_configs/DeepONet/2D/LG_deeponet.yaml` | `configs/model_configs/DeepONet/3D/LG_deeponet.yaml` |
+
+Append `_pca` to the config filename to use PCA-based geometric descriptors (e.g. `LPM_deeponet_pca.yaml`).
+
+**Example** — train LPM-DON on the 2D rotational family with 14 sensor points:
 
 ```bash
-LPM_DEEPONET_MODEL_CONFIG="./configs/model_configs/DeepONet/LPM_deeponet.yaml"
-
-SIM_CONFIG="./configs/system_dynamics.yaml"
-DATA_CONFIG="./configs/data_configs/2D/rot.yaml"
-OUTPUT_FOLDER_PATH="./outputs/DeepONets/2D/anisotropic/center/rot_14_sensors" # Modify to your prefered output folder name
+MODEL_CONFIG="configs/model_configs/DeepONet/2D/LPM_deeponet.yaml"
+SIM_CONFIG="configs/system_dynamics.yaml"
+DATA_CONFIG="configs/data_configs/2D/rot.yaml"
+OUTPUT_PATH="outputs/DeepONets/2D/anisotropic/center/rot_14_sensors"  # adjust as needed
 NUM_SENSORS=14
 FAMILY_NAME="rot_family"
 DIM=2
 
-
 pipenv run python3 DeepONet/main.py \
-    --model_config "$LPM_DEEPONET_MODEL_CONFIG" \
+    --model_config "$MODEL_CONFIG" \
     --sim_config "$SIM_CONFIG" \
     --data_config "$DATA_CONFIG" \
-    --output_folder_path "$OUTPUT_FOLDER_PATH" \
+    --output_folder_path "$OUTPUT_PATH" \
     --num_sensors "$NUM_SENSORS" \
     --family_name "$FAMILY_NAME" \
-    --dim "$DIM" \
+    --dim "$DIM"
 ```
 
-The LG-DON can be run in a similar manner by using the appropriate model config file.
+---
