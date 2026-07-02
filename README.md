@@ -45,12 +45,12 @@ Download the finite element HDF5 data files from [https://doi.org/10.5281/zenodo
 
 Four PINN variants are available:
 
-| Model | Config (2D) | Config (3D) | Notes |
-|---|---|---|---|
-| LPM-PINN | `configs/model_configs/PINN/2D/LPM_pinn.yaml` | `configs/model_configs/PINN/3D/LPM_pinn.yaml` | Requires `--map_pde` |
-| LG-PINN | `configs/model_configs/PINN/2D/LG_pinn.yaml` | `configs/model_configs/PINN/3D/LG_pinn.yaml` | |
-| PA-PINN | `configs/model_configs/PINN/2D/PA_pinn.yaml` | `configs/model_configs/PINN/3D/PA_pinn.yaml` | |
-| Basic-PINN | `configs/model_configs/PINN/2D/basic_pinn.yaml` | `configs/model_configs/PINN/3D/basic_pinn.yaml` | |
+| Model | Config (2D) | Config (3D) |
+|---|---|---|
+| LPM-PINN | `configs/model_configs/PINN/2D/LPM_pinn.yaml` | `configs/model_configs/PINN/3D/LPM_pinn.yaml` |
+| LG-PINN | `configs/model_configs/PINN/2D/LG_pinn.yaml` | `configs/model_configs/PINN/3D/LG_pinn.yaml` |
+| PA-PINN | `configs/model_configs/PINN/2D/PA_pinn.yaml` | `configs/model_configs/PINN/3D/PA_pinn.yaml` |
+| Basic-PINN | `configs/model_configs/PINN/2D/basic_pinn.yaml` | `configs/model_configs/PINN/3D/basic_pinn.yaml` |
 
 Append `_pca` to the config filename to use PCA-based geometric descriptors instead of deformation parameters (e.g. `LPM_pinn_pca.yaml`).
 
@@ -65,15 +65,13 @@ pipenv run python3 -m PINN.main "${LPM_PINN_CONFIG_FILE}" "${DATA_CONFIG_FILE}" 
     --output_path "${OUTPUT_PATH}" \
     --save \
     --make_internal_predictions \
-    --make_external_predictions \
-    --map_pde
+    --make_external_predictions
 ```
 
 Key flags:
 
 | Flag | Description |
 |---|---|
-| `--map_pde` | Enable latent PDE mapping loss — required for LPM-PINN, omit for all others |
 | `--save` | Save the trained model to `--output_path` |
 | `--make_internal_predictions` | Evaluate on interpolation (internal) test domains after training |
 | `--make_external_predictions` | Evaluate on extrapolation (external) test domains after training |
@@ -94,8 +92,7 @@ Append `_pca` to the config filename to use PCA-based geometric descriptors (e.g
 **Example** — train LPM-DON on the 2D rotational family with 14 sensor points:
 
 ```bash
-MODEL_CONFIG="configs/model_configs/DeepONet/2D/LPM_deeponet.yaml"
-SIM_CONFIG="configs/system_dynamics.yaml"
+LPM_DON_CONFIG_FILE="configs/model_configs/DeepONet/2D/LPM_deeponet.yaml"
 DATA_CONFIG="configs/data_configs/2D/rot.yaml"
 OUTPUT_PATH="outputs/DeepONets/2D/anisotropic/center/rot_14_sensors"  # adjust as needed
 NUM_SENSORS=14
@@ -103,8 +100,7 @@ FAMILY_NAME="rot_family"
 DIM=2
 
 pipenv run python3 DeepONet/main.py \
-    --model_config "$MODEL_CONFIG" \
-    --sim_config "$SIM_CONFIG" \
+    --model_config "$LPM_DON_CONFIG_FILE" \
     --data_config "$DATA_CONFIG" \
     --output_folder_path "$OUTPUT_PATH" \
     --num_sensors "$NUM_SENSORS" \
