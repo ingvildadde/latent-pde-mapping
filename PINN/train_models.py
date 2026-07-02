@@ -17,11 +17,9 @@ def train_pinn(model_config: dict,
                family: DomainFamily,
                device: torch.device,
                save_results: bool,
-               noise_level: float,
                output_path: str = "",
                checkpoint_folder_path: str = None,
-               start_epoch: int = 0,
-               map_pde: bool = False):
+               start_epoch: int = 0):
     
     include_scaling_layer = model_config.get("include_scaling_layer", False)
     val_eval_method = model_config.get("val_method", "max_mse_loss")
@@ -77,7 +75,7 @@ def train_pinn(model_config: dict,
         epochs=model_config["training"]["epochs"],
         data_loss_fn=loss_fn,
         device=device,
-        map_pde=map_pde
+        map_pde=model_config['map_pde']
         )
     
     exp_name = model_config["model"]["name"]

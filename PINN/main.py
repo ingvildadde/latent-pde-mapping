@@ -61,11 +61,9 @@ def run_experiment(args):
             family=internal_family,
             device=device,
             save_results=args.save,
-            noise_level=args.noise,
             output_path=args.output_path,
             checkpoint_folder_path=args.checkpoint_folder_path,
-            start_epoch=args.start_epoch,
-            map_pde=args.map_pde
+            start_epoch=args.start_epoch
             )
         
 
@@ -97,12 +95,9 @@ if __name__ == "__main__":
     parser.add_argument("data_config", nargs="+", help="One or more data config file paths (.yaml).")
 
     parser.add_argument("--output_path", type=str, default="", help="Path to save the output files. Default is output directory.")
-    parser.add_argument("--noise", type=float, default=0.0,
-                        help="Add Gaussian noise to training data. Value is noise level (e.g., 0.01 for 1% noise).")
     parser.add_argument("--save", action="store_true", help="Saves trained models if provided.")
     parser.add_argument("--make_internal_predictions", action="store_true", help="Make predictions on internal test domains if provided.")
     parser.add_argument("--make_external_predictions", action="store_true", help="Make predictions on external test domains if provided.")
-    parser.add_argument("--map_pde", action="store_true", help="Use mapped PDE loss calculation if provided.")
 
     parser.add_argument("--checkpoint_folder_path", type=str, default=None, help="Path to model checkpoint folder to load (.pt). Default is None.")
     parser.add_argument("--start_epoch", type=int, default=0, help="Starting epoch for training when resuming from checkpoint. Default is 0.")

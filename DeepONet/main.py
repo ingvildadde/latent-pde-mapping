@@ -51,7 +51,6 @@ plt.rcParams.update({'font.size': font_size, 'xtick.labelsize': ticks_label_size
 
 def main(
         model_config: str,
-        sim_config: str,
         data_config: str,
         output_folder_path: str,
         num_sensors: int,
@@ -64,7 +63,8 @@ def main(
 
     data_config = load_config(os.path.abspath(data_config))
     model_config = load_config(os.path.abspath(model_config))
-    sim_config = load_config(os.path.abspath(sim_config))
+    sim_config = load_config(os.path.abspath("configs/system_dynamics.yaml"))
+
 
     device = "cuda" if torch.cuda.is_available() else "cpu"
     print(f"Running on {device}")
@@ -229,7 +229,6 @@ if __name__ == "__main__":
     # implement args parsing
     parser = argparse.ArgumentParser(description="Train DeepONet model for system dynamics.")
     parser.add_argument("--model_config", type=str, required=True, help="Path to the model configuration file.")
-    parser.add_argument("--sim_config", type=str, required=True, help="Path to the simulation configuration file.")
     parser.add_argument("--data_config", type=str, required=True, help="Path to the data configuration file.")
     parser.add_argument("--output_folder_path", type=str, required=True, help="Path to the output folder.")
     parser.add_argument("--checkpoint_path", type=str, default=None, help="Path to the checkpoint folder.")
@@ -242,7 +241,6 @@ if __name__ == "__main__":
 
     main(
         model_config=args.model_config,
-        sim_config=args.sim_config,
         data_config=args.data_config,
         output_folder_path=args.output_folder_path,
         num_sensors=args.num_sensors,
