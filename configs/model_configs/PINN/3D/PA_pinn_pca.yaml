@@ -3,13 +3,14 @@ include_F_loss: False
 geometric_descriptor: pca
 use_global_D: False
 use_LPM: False
+map_pde: False
 dimensions: 3
 model:
   activation_function: tanh
   description: Does not use LPM but includes pca geometric descriptor
   hidden_layers: 8
   hidden_units:  64
-  input_size: 6 #13
+  input_size: 6
   name: PA-PINN
   output_size: 2
 optimizer:
@@ -28,9 +29,9 @@ training:
     ode: 1
     pde: 1
   splits:
-    num_boundary_points: 160 #80
-    num_collocation_points: 1400 #700
-    num_initial_points: 60 #30
+    num_boundary_points: 160
+    num_collocation_points: 1400
+    num_initial_points: 60
     num_supervised_points: 14
   val_epochs: 10
   grad_clip_norm: 1.0

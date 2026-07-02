@@ -3,6 +3,7 @@ include_F_loss: False
 geometric_descriptor: none
 use_global_D: False
 use_LPM: False
+map_pde: False
 dimensions: 2
 model:
   activation_function: tanh

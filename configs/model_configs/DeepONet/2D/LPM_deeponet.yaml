@@ -9,18 +9,18 @@ model:
   name: LPM-DeepONet
   activation_function: tanh
   description: Training DeepONet model based on supervised data
-  hidden_layers: 8 #6
-  hidden_units:  50 #100 #50
-  branch_input_size: 20 #7210 #14
-  trunk_input_size: 3 #16 #9 #3
+  hidden_layers: 8
+  hidden_units:  50
+  branch_input_size: 20
+  trunk_input_size: 3
   branches_out_dim: 50
-  output_size: 2 #1
+  output_size: 2
 optimizer:
   learning_rate: 0.001
   name: Adam
 random_seed: 42
 training:
-  batch_size: 264 #140 #264
+  batch_size: 264
   epochs: 5000
   loss_weights:
     bc: 1

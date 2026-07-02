@@ -3,6 +3,7 @@ include_F_loss: False
 geometric_descriptor: affine_parameters
 use_global_D: False
 use_LPM: True
+map_pde: True
 dimensions: 3
 model:
   activation_function: tanh
@@ -20,7 +21,7 @@ optimizer:
 random_seed: 42
 training:
   batch_size: 264
-  epochs: 5000 #150000
+  epochs: 5000
   loss_weights:
     bc: 1
     data: 1
@@ -28,9 +29,9 @@ training:
     ode: 1
     pde: 1
   splits:
-    num_boundary_points: 160 #80
-    num_collocation_points: 1400 #700
-    num_initial_points: 60 #30
+    num_boundary_points: 160
+    num_collocation_points: 1400
+    num_initial_points: 60
     num_supervised_points: 14
   val_epochs: 10
   grad_clip_norm: 1.0

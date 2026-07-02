@@ -3,20 +3,21 @@ include_F_loss: False
 geometric_descriptor: pca
 use_global_D: False
 use_LPM: False
+map_pde: False
 dimensions: 2
 model:
   activation_function: tanh
   description: Does not use LPM but includes pca parameters
   hidden_layers: 8
   hidden_units:  64
-  input_size: 5 #9
+  input_size: 5
   name: PA-PINN
   output_size: 2
 optimizer:
   learning_rate: 0.001
   lr_scheduler: none
   name: Adam
-random_seed: 42 #1234
+random_seed: 42
 training:
   batch_size: 264
   epochs: 5000

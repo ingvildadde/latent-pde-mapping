@@ -3,6 +3,7 @@ include_F_loss: False
 geometric_descriptor: none
 use_global_D: False
 use_LPM: False
+map_pde: False
 dimensions: 3
 model:
   activation_function: tanh
@@ -28,9 +29,9 @@ training:
     ode: 1
     pde: 1
   splits:
-    num_boundary_points: 160 #80
-    num_collocation_points: 1400 #700
-    num_initial_points: 60 #30
+    num_boundary_points: 160
+    num_collocation_points: 1400
+    num_initial_points: 60
     num_supervised_points: 14
   val_epochs: 10
   grad_clip_norm: 1.0
