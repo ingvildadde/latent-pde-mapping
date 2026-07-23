@@ -2,7 +2,7 @@
 
 This repository contains the code implementation for the paper:
 
-> **Latent PDE mapping for physics-informed learning across geometries with limited data**
+> **Latent PDE mapping for efficient physics-informed learning across geometries with limited data**
 
 Latent PDE mapping enables accurate predictions on novel, unseen geometries by pulling back
 geometry-specific PDE residuals and boundary conditions to a predefined latent geometry via the
